@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RepoPilot AI — From First Issue to First Contribution</title>
+
+    <!-- Favicon icon using SVG rocket -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B5CF6'><path d='M12 2.5s3.5 2.5 4.5 7.5c-1.5 1-3.5 1-4.5 1s-3 0-4.5-1C8.5 5 12 2.5 12 2.5z'/><path d='M7.5 11c-.5 2-.5 4.5 0 6.5l-3 1.5.5-3.5 2.5-4.5zM16.5 11c.5 2 .5 4.5 0 6.5l3 1.5-.5-3.5-2.5-4.5z'/><circle cx='12' cy='15' r='1.5'/></svg>" />
+
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <!-- External Chart Library (Chart.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- Main Design System & Theme Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Ambient glowing decorative backgrounds -->
+    <div class="ambient-glow"></div>
+    <div class="ambient-glow-2"></div>
+
+    <div class="app-layout">
+
+        <!-- ====================================================================
+         A. LEFT SIDEBAR
+         ==================================================================== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon-box">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>RepoPilot <span class="brand-badge">AI</span></h1>
+                    <p class="brand-tagline">First Issue to Contribution</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <span class="nav-section-title">Navigation</span>
+
+                <a href="#home" class="nav-item active" data-page="home">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span>Home</span>
+                </a>
+
+                <a href="#analyzer" class="nav-item" data-page="analyzer">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <span>Repo Analyzer</span>
+                </a>
+
+                <a href="#matcher" class="nav-item" data-page="matcher">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                    <span>Issue Matcher</span>
+                    <span class="nav-counter" id="matcher-count-badge">0</span>
+                </a>
+
+                <a href="#roadmap" class="nav-item" data-page="roadmap">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    <span>Roadmap</span>
+                </a>
+
+                <a href="#pr-checker" class="nav-item" data-page="pr-checker">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                    </svg>
+                    <span>PR Readiness</span>
+                </a>
+
+                <a href="#analytics" class="nav-item" data-page="analytics">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>Analytics</span>
+                </a>
+
+                <span class="nav-section-title" style="margin-top: 14px;">Preferences</span>
+
+                <a href="#settings" class="nav-item" data-page="settings">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="api-status-card">
+                    <div class="status-row">
+                        <span class="status-indicator">
+                            <span class="status-dot"></span> GitHub REST API
+                        </span>
+                        <span id="rate-limit-text">60 / 60 reqs</span>
+                    </div>
+                    <div class="rate-limit-bar">
+                        <div class="rate-limit-progress" id="rate-limit-bar"></div>
+                    </div>
+                    <p style="font-size:10.5px;color:var(--text-dim);margin-top:4px;" id="rate-reset-label">Direct
+                        browser CORS requests</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ====================================================================
+         MAIN WRAPPER & TOP BAR
+         ==================================================================== -->
+        <div class="main-wrapper">
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                    <div class="page-breadcrumb">
+                        <span>RepoPilot</span>
+                        <span>/</span>
+                        <span class="current" id="breadcrumb-current">Overview</span>
+                    </div>
+                </div>
+
+                <div class="top-bar-right">
+                    <span id="top-demo-badge" class="badge-demo-active" style="display:none;">
+                        <span
+                            style="width:6px; height:6px; background:#fbbf24; border-radius:50%; display:inline-block;"></span>
+                        DEMO ACTIVE
+                    </span>
+                    <button class="btn btn-secondary btn-sm" id="btn-load-complete-demo"
+                        title="One-Click Complete Demo Mode"
+                        style="border-color: rgba(245, 158, 11, 0.4); color: #fbbf24; font-weight: 600;">
+                        <svg fill="currentColor" viewBox="0 0 20 20" width="14" height="14" style="margin-right:4px;">
+                            <path fill-rule="evenodd"
+                                d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Load Complete Demo
+                    </button>
+                    <div class="demo-mode-toggle" title="Switch between live GitHub API calls and curated sample data">
+                        <span id="demo-mode-label">Demo Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="demo-mode-switch" />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-secondary btn-sm">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </header>
+
+            <!-- ==================================================================
+           PAGE 1: HOME (DASHBOARD)
+           ================================================================== -->
+            <main class="page-container active" id="page-home">
+                <!-- B. Welcome Section -->
+                <section class="hero-banner">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Next-Gen Open-Source Navigator
+                        </div>
+                        <h1 class="hero-title">Welcome back, Developer!</h1>
+                        <p class="hero-subtitle">
+                            Your journey from first issue to first contribution starts here. Discover vetted
+                            beginner-friendly tasks, understand repo difficulty, follow step-by-step roadmaps, and
+                            submit review-ready pull requests.
+                        </p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary" id="home-btn-analyze">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                Analyze Repository
+                            </button>
+                            <button class="btn btn-secondary" id="home-btn-explore">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                                Explore Open Source
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Demo Mode Notice Banner (Visible when Demo Mode is Active) -->
+                <div id="home-demo-banner" class="demo-active-banner" style="display:none;">
+                    <svg fill="currentColor" width="20" height="20" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span><strong>DEMO MODE ACTIVE:</strong> Currently displaying curated offline repository datasets.
+                        All metrics and issues below are labeled DEMO. Toggle Demo Mode switch in the top bar to switch
+                        to live GitHub API requests.</span>
+                </div>
+
+                <!-- C. Statistics KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Repositories Analyzed</span>
+                            <div class="kpi-icon-box icon-purple">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpi-repos">0</div>
+                        <div class="kpi-trend positive" id="kpi-repos-trend">
+                            <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Verified via GitHub API
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Issues Discovered</span>
+                            <div class="kpi-icon-box icon-blue">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpi-issues">0</div>
+                        <div class="kpi-trend neutral">Excludes pull requests</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Beginner Friendly</span>
+                            <div class="kpi-icon-box icon-emerald">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpi-beginner">0</div>
+                        <div class="kpi-trend positive">Good first issues & docs</div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Fit Opportunities</span>
+                            <div class="kpi-icon-box icon-amber">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpi-opps">0</div>
+                        <div class="kpi-trend positive">Fit Score &ge; 70%</div>
+                    </div>
+                </div>
+
+                <!-- Quick Launch Repository Bar -->
+                <div class="card">
+                    <h2 class="card-title">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        Quick Repository Launcher
+                    </h2>
+                    <p class="card-subtitle">Choose from popular active open-source projects or enter any public GitHub
+                        URL.</p>
+                    <div class="suggestions-bar">
+                        <span class="suggestions-label">Try Popular Repos:</span>
+                        <button class="suggestion-chip" data-repo="pallets/flask">
+                            <span>pallets/flask</span>
+                            <span style="color:#10b981;">● Python</span>
+                        </button>
+                        <button class="suggestion-chip" data-repo="streamlit/streamlit">
+                            <span>streamlit/streamlit</span>
+                            <span style="color:#10b981;">● Python</span>
+                        </button>
+                        <button class="suggestion-chip" data-repo="facebook/react">
+                            <span>facebook/react</span>
+                            <span style="color:#3b82f6;">● React</span>
+                        </button>
+                        <button class="suggestion-chip" data-repo="expressjs/express">
+                            <span>expressjs/express</span>
+                            <span style="color:#f59e0b;">● Node.js</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- ==================================================================
+           PAGE 2: REPOSITORY ANALYZER
+           ================================================================== -->
+            <section class="page-container" id="page-analyzer">
+                <div class="card">
+                    <h2 class="card-title">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        GitHub Repository Analyzer
+                    </h2>
+                    <p class="card-subtitle">Enter any public repository URL to fetch real metadata, open issues,
+                        labels, and difficulty breakdown.</p>
+
+                    <div class="input-group">
+                        <input type="text" class="input-field" id="repo-url-input"
+                            placeholder="e.g. https://github.com/pallets/flask or pallets/flask"
+                            value="https://github.com/pallets/flask" />
+                        <button class="btn btn-primary" id="analyze-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                            Analyze Repository
+                        </button>
+                    </div>
+
+                    <div class="suggestions-bar">
+                        <span class="suggestions-label">Presets:</span>
+                        <button class="suggestion-chip" data-repo="pallets/flask">pallets/flask</button>
+                        <button class="suggestion-chip" data-repo="streamlit/streamlit">streamlit/streamlit</button>
+                        <button class="suggestion-chip" data-repo="facebook/react">facebook/react</button>
+                    </div>
+
+                    <!-- Error Message Banner -->
+                    <div class="error-banner" id="repo-error-banner">
+                        <div class="error-banner-header">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span id="repo-error-title">GitHub API Error</span>
+                        </div>
+                        <p id="repo-error-message">Error details...</p>
+                        <div class="error-banner-actions">
+                            <button class="btn btn-secondary btn-sm" id="repo-error-switch-demo">Switch to Demo
+                                Mode</button>
+                            <button class="btn btn-primary btn-sm" id="repo-error-open-settings">Add GitHub
+                                Token</button>
+                        </div>
+                    </div>
+
+                    <!-- Loading Skeleton -->
+                    <div id="repo-loading-skeleton" style="display:none; margin-top:20px;">
+                        <div class="skeleton" style="height: 24px; width: 60%; margin-bottom: 12px;"></div>
+                        <div class="skeleton" style="height: 16px; width: 80%; margin-bottom: 20px;"></div>
+                        <div class="skeleton" style="height: 80px; width: 100%;"></div>
+                    </div>
+
+                    <!-- D. Repository Meta Card -->
+                    <div class="repo-info-card" id="repo-info-card">
+                        <div id="repo-simulated-disclaimer" class="simulated-banner" style="display:none;">
+                            <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span><strong>SIMULATED DEMO METRICS:</strong> Displaying deterministic offline sample data
+                                for demo purposes. Not current live GitHub statistics.</span>
+                        </div>
+                        <div class="repo-header">
+                            <div class="repo-identity">
+                                <img id="repo-avatar" class="repo-avatar" src="" alt="Owner Avatar" />
+                                <div class="repo-name-box">
+                                    <h3><a id="repo-name-link" href="#" target="_blank"
+                                            rel="noopener noreferrer">Owner/Repo</a></h3>
+                                    <span id="repo-demo-indicator"
+                                        style="display:none; font-size:11px; background:rgba(245,158,11,0.2); color:#f59e0b; padding:2px 8px; border-radius:10px; border:1px solid rgba(245,158,11,0.4); margin-top:4px;">DEMO
+                                        DATA</span>
+                                </div>
+                            </div>
+                            <a id="repo-github-btn" href="#" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-secondary btn-sm">
+                                <svg fill="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                                </svg>
+                                View on GitHub
+                            </a>
+                        </div>
+
+                        <p class="repo-desc" id="repo-desc">Description</p>
+                        <div class="repo-tags" id="repo-tags"></div>
+
+                        <div class="repo-stats-row">
+                            <div class="stat-item">
+                                <span class="stat-item-label">Stars</span>
+                                <span class="stat-item-value" id="repo-stars">
+                                    <svg fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    </svg>
+                                    0
+                                </span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-item-label">Forks</span>
+                                <span class="stat-item-value" id="repo-forks">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-item-label">Open Issues</span>
+                                <span class="stat-item-value" id="repo-open-issues">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-item-label">Language</span>
+                                <span class="stat-item-value" id="repo-lang">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-item-label">License</span>
+                                <span class="stat-item-value" id="repo-license">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================================================================
+           PAGE 3: SMART ISSUE MATCHER
+           ================================================================== -->
+            <section class="page-container" id="page-matcher">
+                <div class="card">
+                    <h2 class="card-title">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        Smart Issue Matcher
+                    </h2>
+                    <p class="card-subtitle">Contribution suitability scoring (0–100) and difficulty classification
+                        based on live GitHub issue metadata.</p>
+
+                    <div class="filter-bar">
+                        <div class="filter-pills">
+                            <button class="filter-pill active" data-filter="all">All Issues</button>
+                            <button class="filter-pill" data-filter="beginner">Beginner Friendly</button>
+                            <button class="filter-pill" data-filter="intermediate">Intermediate</button>
+                            <button class="filter-pill" data-filter="advanced">Advanced</button>
+                            <button class="filter-pill" data-filter="top5"
+                                style="border-color: rgba(139,92,246,0.4); color:#c4b5fd;">⭐ Top 5 Recommended</button>
+                        </div>
+
+                        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <input type="text" id="issue-search" class="input-field" placeholder="Search issues..."
+                                style="padding: 7px 12px; font-size:12.5px; width:180px;" />
+                            <select class="sort-select" id="sort-select">
+                                <option value="fit-desc">Highest Fit Score</option>
+                                <option value="fit-asc">Lowest Fit Score</option>
+                                <option value="comments">Most Comments</option>
+                                <option value="newest">Newest Issue</option>
+                            </select>
+                            <button class="btn btn-primary btn-sm" id="btn-find-issues" title="Find and load issues">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                                Find Issues
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Issues Grid -->
+                    <div class="issues-grid" id="issues-grid">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                            <h3>No repository analyzed yet</h3>
+                            <p>Analyze a repository in the <strong>Repo Analyzer</strong> or click a preset to fetch
+                                live issues.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================================================================
+           PAGE 4: CONTRIBUTION ROADMAP
+           ================================================================== -->
+            <section class="page-container" id="page-roadmap">
+                <div class="roadmap-container">
+
+                    <!-- Roadmap Header -->
+                    <div class="roadmap-header-card">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                                <span class="issue-repo-tag" id="roadmap-repo-tag">pallets/flask</span>
+                                <span class="badge-difficulty beginner" id="roadmap-difficulty-badge">Beginner</span>
+                                <span id="roadmap-demo-badge"
+                                    style="display:none; font-size:10px; background:rgba(245,158,11,0.2); color:#f59e0b; padding:2px 6px; border-radius:6px;">DEMO</span>
+                            </div>
+                            <h2 style="font-size:20px; font-weight:700; color:#fff;" id="roadmap-issue-title">Select an
+                                issue to generate roadmap</h2>
+                        </div>
+
+                        <div class="roadmap-progress-box">
+                            <div class="progress-header">
+                                <span>Contribution Readiness</span>
+                                <span id="roadmap-progress-text" style="color:var(--accent-purple);">0% Completed (0/7
+                                    Steps)</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="roadmap-progress-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Issue Switcher inside Roadmap -->
+                    <div
+                        style="display:flex; align-items:center; justify-content:space-between; background:var(--bg-card); padding:12px 18px; border-radius:var(--radius-md); border:1px solid var(--border-color); flex-wrap:wrap; gap:10px;">
+                        <span style="font-size:13px; color:var(--text-muted);">Active Roadmap Issue:</span>
+                        <select id="roadmap-issue-select" class="sort-select" style="min-width:280px;">
+                            <option value="">-- Choose Analyzed Issue --</option>
+                        </select>
+                    </div>
+
+                    <!-- Step-by-Step Timeline (7 Complete Steps) -->
+                    <div class="timeline">
+
+                        <!-- Step 1: Understand Problem -->
+                        <div class="timeline-step active">
+                            <div class="step-marker">1</div>
+                            <div class="step-card">
+                                <div class="step-title-row">
+                                    <h3 class="step-title">1. Understand the Problem</h3>
+                                    <label class="step-checkbox-label">
+                                        <input type="checkbox" class="step-checkbox" data-step="1" />
+                                        <span>Mark as Done</span>
+                                    </label>
+                                </div>
+                                <p style="margin-bottom:10px;">Read the issue description, understand the bug
+                                    reproduction or feature requirements, and review discussions:</p>
+                                <div class="code-box"
+                                    style="white-space: pre-wrap; font-size: 12.5px; line-height: 1.6;"
+                                    id="roadmap-problem-body">
+                                    Select an issue from the Issue Matcher or dropdown above to populate the real issue
+                                    details.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Explore Relevant Source Files -->
+                        <div class="timeline-step">
+                            <div class="step-marker">2</div>
+                            <div class="step-card">
+                                <div class="step-title-row">
+                                    <h3 class="step-title">2. Explore Relevant Source Files</h3>
+                                    <label class="step-checkbox-label">
+                                        <input type="checkbox" class="step-checkbox" data-step="2" />
+                                        <span>Mark as Done</span>
+                                    </label>
+                                </div>
+                                <p style="margin-bottom:8px;" id="roadmap-files-desc">Inspected repository structure and
+                                    target modules:</p>
+                                <ul id="roadmap-suggested-files"
+                                    style="padding-left: 20px; color: var(--text-muted); line-height: 1.8;">
+                                    <li>Explore repository directory tree</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Create a Git Branch -->
+                        <div class="timeline-step">
+                            <div class="step-marker">3</div>
+                            <div class="step-card">
+                                <div class="step-title-row">
+                                    <h3 class="step-title">3. Create a Git Branch</h3>
+                                    <label class="step-checkbox-label">
+                                        <input type="checkbox" class="step-checkbox" data-step="3" />
+                                        <span>Mark as Done</span>
+                                    </label>
+                                </div>
+                                <p>Run these terminal commands to clone the repository and create an isolated working
+                                    branch:</p>
+                                <div class="code-box">
+                                    <div class="code-box-header">
+                                        <span>Bash / PowerShell</span>
+                                        <button class="copy-btn" id="copy-git-cmd-btn">
+                                            <svg fill="none" stroke="currentColor" width="12" height="12"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                            </svg>
+                                            Copy Commands
+                                        </button>
+                                    </div>
+                                    <pre id="roadmap-git-clone-code">git clone https://github.com/pallets/flask.git
+cd flask
+git checkout -b fix/issue-branch</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Plan Implementation -->
+                        <div class="timeline-step">
+                            <div class="step-marker">4</div>
+                            <div class="step-card">
+                                <div class="step-title-row">
+                                    <h3 class="step-title">4. Plan Implementation</h3>
+                                    <label class="step-checkbox-label">
+                                        <input type="checkbox" class="step-checkbox" data-step="4" />
+                                        <span>Mark as Done</span>
+                                    </label>
+                                </div>
+                                <ul id="roadmap-plan-checklist"
+                                    style="padding-left: 20px; color: var(--text-muted); line-height: 1.8;">
+                                    <li>Identify the minimum code change required to solve the issue.</li>
+                                    <li>Verify if configuration files or documentation need updating.</li>
+                                    <li>Check existing tests for similar components to understand testing patterns.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Implement Changes -->
+                        <div class="timeline-step">
+                            <div class="step-marker">5</div>
+                            <div class="step-card">
+                                <div class="step-title-row">
+                                    <h3 class="step-title">5. Implement Changes</h3>
+                                    <label class="step-checkbox-label">
+                                        <input type="checkbox" class="step-checkbox" data-step="5" />
+                                        <span>Mark as Done</span>
+                                    </label>
+                                </div>
+                                <ul style="padding-left: 20px; color: var(--text-muted); line-height: 1.8;">
+                                    <li>Write clean, readable code conforming to project style conventions.</li>
+                                    <li>Keep commits atomic with clear, descriptive commit messages.</li>
+                                    <li>Avoid modifying unrelated files to keep pull request review clean.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Step 6: Run Tests -->
+                        <div class="timeline-step">
+                            <div class="step-marker">6</div>
+                            <div class="step-card">
+                                <div class="step-title-row">
+                                    <h3 class="step-title">6. Run Tests</h3>
+                                    <label class="step-checkbox-label">
+                                        <input type="checkbox" class="step-checkbox" data-step="6" />
+                                        <span>Mark as Done</span>
+                                    </label>
+                                </div>
+                                <p id="roadmap-test-instruction">Run project test suite locally to prevent regressions:
+                                </p>
+                                <div class="code-box">
+                                    <pre id="roadmap-test-cmd">pytest</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 7: Prepare a Pull Request -->
+                        <div class="timeline-step">
+                            <div class="step-marker">7</div>
+                            <div class="step-card">
+                                <div class="step-title-row">
+                                    <h3 class="step-title">7. Prepare a Pull Request</h3>
+                                    <label class="step-checkbox-label">
+                                        <input type="checkbox" class="step-checkbox" data-step="7" />
+                                        <span>Mark as Done</span>
+                                    </label>
+                                </div>
+                                <p>Push your branch and use this pre-formatted Pull Request description template:</p>
+                                <div class="code-box">
+                                    <div class="code-box-header">
+                                        <span>Markdown Template</span>
+                                        <button class="copy-btn" id="copy-pr-template-btn">
+                                            <svg fill="none" stroke="currentColor" width="12" height="12"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                            </svg>
+                                            Copy PR Template
+                                        </button>
+                                    </div>
+                                    <pre id="roadmap-pr-template-code">### What does this PR do?
+Resolves issue.
+
+### Related Issue
+Closes #</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================================================================
+           PAGE 5: PR READINESS CHECKER
+           ================================================================== -->
+            <section class="page-container" id="page-pr-checker">
+                <div class="card">
+                    <h2 class="card-title">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        PR Readiness Checker
+                    </h2>
+                    <p class="card-subtitle">Analyze real public GitHub Pull Requests across metadata, changed files,
+                        review status, and readiness heuristics.</p>
+
+                    <div class="input-group">
+                        <input type="text" class="input-field" id="pr-url-input"
+                            placeholder="https://github.com/pallets/flask/pull/6168"
+                            value="https://github.com/pallets/flask/pull/6168" />
+                        <button class="btn btn-primary" id="check-pr-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Check PR Readiness
+                        </button>
+                    </div>
+
+                    <div class="suggestions-bar">
+                        <span class="suggestions-label">Try Real PRs:</span>
+                        <button class="suggestion-chip pr-sample-chip"
+                            data-pr-url="https://github.com/pallets/flask/pull/6168">
+                            <span>pallets/flask#6168</span>
+                        </button>
+                        <button class="suggestion-chip pr-sample-chip"
+                            data-pr-url="https://github.com/streamlit/streamlit/pull/8435">
+                            <span>streamlit/streamlit#8435</span>
+                        </button>
+                    </div>
+
+                    <!-- PR Error Banner -->
+                    <div class="error-banner" id="pr-error-banner">
+                        <div class="error-banner-header">
+                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span id="pr-error-title">PR Fetch Error</span>
+                        </div>
+                        <p id="pr-error-message">Error details...</p>
+                    </div>
+
+                    <!-- PR Results Section -->
+                    <div class="pr-results-card" id="pr-results-card">
+
+                        <div id="pr-simulated-disclaimer" class="simulated-banner"
+                            style="display:none; background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.35); color:#fef08a;">
+                            <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                                <path fill-rule="evenodd"
+                                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span><strong>SIMULATED DEMO PR - NOT A LIVE GITHUB PULL REQUEST:</strong> This pull request
+                                inspection is generated from offline seed data. It demonstrates readiness scoring, diff
+                                analysis, and review checklists without querying GitHub APIs or claiming actual
+                                maintainer approval.</span>
+                        </div>
+
+                        <div class="pr-overview-header">
+                            <div style="flex:1;">
+                                <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                                    <span id="pr-state-badge" class="badge-difficulty beginner">Open</span>
+                                    <span id="pr-review-badge"
+                                        style="font-size:11px; padding:3px 8px; border-radius:10px; background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3);">Review:
+                                        Pending</span>
+                                    <span id="pr-demo-indicator"
+                                        style="display:none; font-size:11px; background:rgba(245,158,11,0.2); color:#f59e0b; padding:2px 6px; border-radius:6px;">DEMO
+                                        PR</span>
+                                </div>
+                                <h3 id="pr-title-display" style="font-size:18px; color:#fff; margin-bottom:4px;">PR
+                                    Title</h3>
+                                <p id="pr-author-display" style="color:var(--text-muted); font-size:13px;">by @author
+                                </p>
+                                <div
+                                    style="display:flex; gap:12px; margin-top:8px; font-size:12px; color:var(--text-dim); flex-wrap:wrap;">
+                                    <span id="pr-branch-display">branch &rarr; main</span>
+                                    <span>•</span>
+                                    <span id="pr-diff-display">+0 / -0 across 0 files</span>
+                                </div>
+                            </div>
+
+                            <div class="pr-gauge-box">
+                                <div class="pr-gauge-score good" id="pr-gauge-score">0%</div>
+                                <span
+                                    style="font-size:11px; text-transform:uppercase; color:var(--text-dim); font-weight:600;">Readiness
+                                    Score</span>
+                            </div>
+                        </div>
+
+                        <!-- Changed Files List -->
+                        <div style="margin-bottom:14px;">
+                            <h4
+                                style="font-size:13px; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em;">
+                                Changed Files</h4>
+                            <div class="pr-files-list" id="pr-files-list">
+                                <div style="color:var(--text-dim); font-size:12px;">No files loaded</div>
+                            </div>
+                        </div>
+
+                        <!-- Readiness Criteria Checklist -->
+                        <div class="pr-checklist-grid">
+
+                            <div class="check-item" id="check-desc">
+                                <div class="check-icon pass">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <div class="check-details">
+                                    <h4>Description Quality</h4>
+                                    <p>Comprehensive description explaining problem and fix.</p>
+                                </div>
+                            </div>
+
+                            <div class="check-item" id="check-linked-issue">
+                                <div class="check-icon pass">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <div class="check-details">
+                                    <h4>Linked Issue</h4>
+                                    <p>Closes/Fixes issue reference detected.</p>
+                                </div>
+                            </div>
+
+                            <div class="check-item" id="check-diff-size">
+                                <div class="check-icon pass">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <div class="check-details">
+                                    <h4>Diff Size Manageability</h4>
+                                    <p>Manageable changes volume.</p>
+                                </div>
+                            </div>
+
+                            <div class="check-item" id="check-files-count">
+                                <div class="check-icon pass">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <div class="check-details">
+                                    <h4>File Scope Focus</h4>
+                                    <p>Scope across modified files.</p>
+                                </div>
+                            </div>
+
+                            <div class="check-item" id="check-review-status">
+                                <div class="check-icon warn">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                    </svg>
+                                </div>
+                                <div class="check-details">
+                                    <h4>Review & Approval Status</h4>
+                                    <p>Reviewer assessment status.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Disclaimer Notice -->
+                        <div class="disclaimer-banner">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span>
+                                <strong>Heuristic Assessment Notice:</strong> RepoPilot AI evaluates automated
+                                structural hygiene only. It does not predict or guarantee pull request acceptance. Final
+                                code review and merge decisions remain solely at repository maintainers' discretion.
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ==================================================================
+           PAGE 6: ANALYTICS
+           ================================================================== -->
+            <section class="page-container" id="page-analytics">
+                <div class="card">
+                    <div
+                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+                        <div>
+                            <h2 class="card-title" style="margin:0;">Analytics Dashboard</h2>
+                            <p class="card-subtitle" style="margin:0;">Dynamic statistics and metrics derived from live
+                                repository audits.</p>
+                        </div>
+                        <span id="analytics-active-repo-badge" class="issue-repo-tag">No Repo Loaded</span>
+                    </div>
+
+                    <!-- Dynamic Analytics KPI Grid (6 Cards) -->
+                    <div class="analytics-kpi-grid">
+                        <div class="kpi-card" style="padding:14px; margin:0;">
+                            <span class="kpi-label">Audited Repos</span>
+                            <div class="kpi-value" id="analytics-kpi-repos" style="font-size:22px;">0</div>
+                        </div>
+                        <div class="kpi-card" style="padding:14px; margin:0;">
+                            <span class="kpi-label">Open Issues</span>
+                            <div class="kpi-value" id="analytics-kpi-issues" style="font-size:22px;">0</div>
+                        </div>
+                        <div class="kpi-card" style="padding:14px; margin:0;">
+                            <span class="kpi-label">Beginner Issues</span>
+                            <div class="kpi-value" id="analytics-kpi-beginner" style="font-size:22px; color:#10B981;">0
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="padding:14px; margin:0;">
+                            <span class="kpi-label">Intermediate</span>
+                            <div class="kpi-value" id="analytics-kpi-intermediate"
+                                style="font-size:22px; color:#F59E0B;">0</div>
+                        </div>
+                        <div class="kpi-card" style="padding:14px; margin:0;">
+                            <span class="kpi-label">Advanced</span>
+                            <div class="kpi-value" id="analytics-kpi-advanced" style="font-size:22px; color:#EF4444;">0
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="padding:14px; margin:0;">
+                            <span class="kpi-label">High-Fit (&ge;70%)</span>
+                            <div class="kpi-value" id="analytics-kpi-opps" style="font-size:22px; color:#8B5CF6;">0
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3 class="card-title" style="font-size:16px;">Issue Difficulty Distribution</h3>
+                                <span style="font-size:11.5px; color:var(--text-dim);">Beginner vs Advanced</span>
+                            </div>
+                            <div class="chart-canvas-wrapper" id="chart-diff-wrapper">
+                                <canvas id="chart-difficulty"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3 class="card-title" style="font-size:16px;">Contribution Fit Score Ranges</h3>
+                                <span style="font-size:11.5px; color:var(--text-dim);">Score Buckets</span>
+                            </div>
+                            <div class="chart-canvas-wrapper" id="chart-fit-wrapper">
+                                <canvas id="chart-fit-scores"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-card" style="min-height: 280px;">
+                        <div class="chart-header">
+                            <h3 class="card-title" style="font-size:16px;">Top Issue Labels Breakdown</h3>
+                            <span style="font-size:11.5px; color:var(--text-dim);">Label Frequency</span>
+                        </div>
+                        <div class="chart-canvas-wrapper" id="chart-labels-wrapper">
+                            <canvas id="chart-labels"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Top Recommended Contribution Opportunities -->
+                    <div class="chart-card" id="analytics-opps-container" style="min-height: 200px; margin-top:20px;">
+                        <div class="chart-header">
+                            <h3 class="card-title" style="font-size:16px;">High-Fit Contribution Opportunities</h3>
+                            <span style="font-size:11.5px; color:var(--text-dim);">Top Recommended Issues (Fit Score
+                                &ge; 70)</span>
+                        </div>
+                        <div id="analytics-opps-table-wrapper" style="overflow-x:auto;">
+                            <table class="opportunities-table" id="analytics-opportunities-table">
+                                <thead>
+                                    <tr>
+                                        <th>Issue</th>
+                                        <th>Title</th>
+                                        <th>Difficulty</th>
+                                        <th>Fit Score</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="analytics-opps-tbody">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================================================================
+           PAGE 7: SETTINGS & TOKEN
+           ================================================================== -->
+            <section class="page-container" id="page-settings">
+                <div class="card" style="max-width: 700px;">
+                    <h2 class="card-title">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        GitHub API & Rate Limit Settings
+                    </h2>
+                    <p class="card-subtitle">By default, RepoPilot AI uses unauthenticated GitHub REST requests (60
+                        requests/hour per IP). To unlock 5,000 requests/hour, supply an optional GitHub Personal Access
+                        Token.</p>
+
+                    <div style="margin-bottom: 20px;">
+                        <label
+                            style="display:block; font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:6px;">
+                            GitHub Personal Access Token (classic or fine-grained)
+                        </label>
+                        <input type="password" id="gh-token-input" class="input-field" style="width:100%;"
+                            placeholder="ghp_xxxxxxxxxxxxxxxxxxxx or github_pat_xxxxxxxx" />
+                        <p style="font-size:11.5px; color:var(--text-dim); margin-top:6px;">
+                            Stored privately in your browser's local storage (<code>localStorage</code>). Never sent to
+                            any server other than <code>api.github.com</code>.
+                        </p>
+                    </div>
+
+                    <div style="display:flex; gap:12px;">
+                        <button class="btn btn-primary" id="save-token-btn">
+                            Save Token
+                        </button>
+                        <button class="btn btn-secondary" id="clear-token-btn">
+                            Clear Token
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Issue Detail Modal -->
+    <div id="issue-detail-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span class="issue-number" id="modal-issue-num">#0</span>
+                        <span class="badge-difficulty" id="modal-issue-diff">Beginner</span>
+                        <span id="modal-demo-pill"
+                            style="display:none; font-size:10px; background:rgba(245,158,11,0.2); color:#f59e0b; padding:2px 8px; border-radius:6px; font-weight:700;">DEMO
+                            ISSUE</span>
+                    </div>
+                    <h3 id="modal-issue-title" style="margin-top:8px; font-size:16px; color:#fff; font-weight:600;">
+                        Issue Title</h3>
+                </div>
+                <button class="modal-close-btn" id="modal-close-btn" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Fit Score & Explanation -->
+                <div class="modal-section">
+                    <h4
+                        style="font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px; letter-spacing:0.04em;">
+                        Contribution Fit Score</h4>
+                    <div
+                        style="display:flex; align-items:center; gap:14px; background:rgba(255,255,255,0.02); padding:10px 14px; border-radius:8px; border:1px solid var(--border-color);">
+                        <div class="fit-score-box" style="padding:6px 12px; min-width:65px;">
+                            <div class="fit-score-num" id="modal-fit-score" style="font-size:22px;">0</div>
+                            <div class="fit-score-label">Fit Score</div>
+                        </div>
+                        <ul id="modal-score-explanations"
+                            style="font-size:12px; color:#CBD5E1; margin:0; padding-left:18px; line-height:1.6;"></ul>
+                    </div>
+                </div>
+
+                <!-- Problem Description -->
+                <div class="modal-section">
+                    <h4
+                        style="font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px; letter-spacing:0.04em;">
+                        Problem Statement</h4>
+                    <p id="modal-issue-desc"
+                        style="font-size:13px; line-height:1.6; color:#E2E8F0; background:#080D19; padding:12px 14px; border-radius:8px; border:1px solid var(--border-color); white-space:pre-wrap;">
+                    </p>
+                </div>
+
+                <!-- Suggested Skills -->
+                <div class="modal-section" id="modal-skills-section">
+                    <h4
+                        style="font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px; letter-spacing:0.04em;">
+                        Suggested Skills</h4>
+                    <div id="modal-suggested-skills" style="display:flex; gap:6px; flex-wrap:wrap;"></div>
+                </div>
+
+                <!-- Suggested Implementation Steps -->
+                <div class="modal-section" id="modal-steps-section">
+                    <h4
+                        style="font-size:11px; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px; letter-spacing:0.04em;">
+                        Suggested Implementation Steps</h4>
+                    <ol id="modal-implementation-steps"
+                        style="font-size:12.5px; line-height:1.7; color:#CBD5E1; padding-left:20px;"></ol>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="modal-github-link" href="#" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-secondary btn-sm">
+                    <svg fill="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                    </svg>
+                    View on GitHub
+                </a>
+                <button class="btn btn-primary btn-sm" id="modal-roadmap-btn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                    </svg>
+                    Generate Roadmap
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Core JavaScript Application Engine -->
+    <script src="script.js"></script>
+</body>
+
+</html>

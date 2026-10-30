@@ -1,0 +1,733 @@
+{
+  "session": {
+    "session_id": "demo-session-pallets-flask",
+    "repository_url": "https://github.com/pallets/flask",
+    "pull_request_url": "https://github.com/pallets/flask/pulls",
+    "active": true,
+    "mode": "DEMO",
+    "timestamp": "2026-10-30T13:46:00Z",
+    "notification": "Demo Data Loaded Successfully"
+  },
+  "repository": {
+    "name": "flask",
+    "full_name": "pallets/flask",
+    "owner": {
+      "login": "pallets",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1674850?v=4",
+      "html_url": "https://github.com/pallets"
+    },
+    "html_url": "https://github.com/pallets/flask",
+    "description": "The Python micro framework for building web applications.",
+    "stargazers_count": 74900,
+    "forks_count": 16100,
+    "open_issues_count": 12,
+    "language": "Python",
+    "license": {
+      "name": "BSD-3-Clause",
+      "spdx_id": "BSD-3-Clause"
+    },
+    "topics": [
+      "python",
+      "web-framework",
+      "wsgi",
+      "microframework",
+      "pallets"
+    ],
+    "simulated": true,
+    "simulation_note": "SIMULATED DEMO REPOSITORY - NOT LIVE GITHUB STATISTICS",
+    "overview": "Flask is a lightweight WSGI web application framework designed to make getting started quick and easy, with the ability to scale up to complex applications.",
+    "contents": [
+      "src/flask/",
+      "tests/",
+      "docs/",
+      "examples/",
+      "pyproject.toml",
+      "README.md",
+      "LICENSE.txt"
+    ],
+    "difficulty_distribution": {
+      "Beginner": 4,
+      "Intermediate": 5,
+      "Advanced": 3
+    }
+  },
+  "issues": [
+    {
+      "id": 6146,
+      "number": 6146,
+      "demo_id": "DEMO-6146",
+      "title": "Add Cloudflare to Flask Hosting Platforms documentation",
+      "body": "Cloudflare Pages / Workers now supports Python WSGI applications. We should add a clear deployment guide under docs/deploying/cloudflare.rst explaining prerequisites, wrangler config, and a minimal entry point.",
+      "description": "Cloudflare Pages / Workers now supports Python WSGI applications. We should add a clear deployment guide under docs/deploying/cloudflare.rst explaining prerequisites, wrangler config, and a minimal entry point.",
+      "labels": ["documentation", "good first issue", "easy"],
+      "comments": 2,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/6146",
+      "reference_url": "https://github.com/pallets/flask/issues/6146",
+      "difficulty": "Beginner",
+      "fit_score": 95,
+      "score_explanation": [
+        "Base score for Beginner difficulty: +90",
+        "Active focused discussion (2 comments): +2",
+        "Unassigned & open for contributors: +5",
+        "Comprehensive issue details provided (222 chars): +5"
+      ],
+      "suggested_skills": ["Python", "Documentation", "Sphinx", "Cloudflare Workers"],
+      "suggested_implementation_steps": [
+        "Read existing deployment docs in docs/deploying/ for formatting conventions.",
+        "Create docs/deploying/cloudflare.rst with wrangler.toml configuration.",
+        "Add cross-reference link in docs/deploying/index.rst.",
+        "Build sphinx docs locally using make html and review formatting."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Cloudflare has introduced native Python Workers support. Flask needs documentation detailing how developers can package and deploy a Flask app on Cloudflare.",
+        "suggested_files": [
+          {"path": "docs/deploying/index.rst", "description": "Index of all deployment platform guides"},
+          {"path": "docs/deploying/cloudflare.rst", "description": "New deployment guide file to create"},
+          {"path": "docs/conf.py", "description": "Sphinx documentation configuration"}
+        ],
+        "branch_name": "docs/cloudflare-deployment-guide",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b docs/cloudflare-deployment-guide",
+        "plan_checklist": [
+          "Review existing deployment docs (e.g., docs/deploying/gunicorn.rst).",
+          "Draft step-by-step instructions for wrangler init, pyproject.toml dependencies, and entrypoint.",
+          "Verify Sphinx rendering without docutils warnings.",
+          "Check spelling and hyperlink targets."
+        ],
+        "test_commands": "tox -e docs\n# Or: cd docs && make html",
+        "pr_template": "### What does this PR do?\nAdds a deployment guide for Cloudflare Workers/Pages in docs/deploying/cloudflare.rst.\n\n### Related Issue\nCloses #6146\n\n### Testing\n- [x] Built documentation locally via Sphinx (`make html`).\n- [x] Verified zero docutils syntax warnings."
+      }
+    },
+    {
+      "id": 5918,
+      "number": 5918,
+      "demo_id": "DEMO-5918",
+      "title": "CLI: Improve error diagnostic when FLASK_APP points to nonexistent module",
+      "body": "When FLASK_APP points to a typo like `myapp:ape`, the current stacktrace originates deep inside werkzeug loader. A friendlier message pinpointing the missing symbol would save beginners hours.",
+      "description": "When FLASK_APP points to a typo like `myapp:ape`, the current stacktrace originates deep inside werkzeug loader. A friendlier message pinpointing the missing symbol would save beginners hours.",
+      "labels": ["cli", "enhancement", "good first issue"],
+      "comments": 4,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/5918",
+      "reference_url": "https://github.com/pallets/flask/issues/5918",
+      "difficulty": "Beginner",
+      "fit_score": 92,
+      "score_explanation": [
+        "Base score for Beginner difficulty: +90",
+        "Active focused discussion (4 comments): +4",
+        "Unassigned & open for contributors: +5",
+        "Good clarity in problem description: +5"
+      ],
+      "suggested_skills": ["Python", "Click", "CLI", "Error Handling"],
+      "suggested_implementation_steps": [
+        "Locate module loading logic in src/flask/cli.py.",
+        "Catch ModuleNotFoundError and AttributeError specifically when resolving FLASK_APP.",
+        "Format a concise ClickException highlighting the exact module name or attribute.",
+        "Add test cases in tests/test_cli.py reproducing module typo."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Loading an invalid FLASK_APP value dumps an intimidating Werkzeug traceback instead of a clear human-readable guidance message.",
+        "suggested_files": [
+          {"path": "src/flask/cli.py", "description": "Flask command line interface and app loader"},
+          {"path": "tests/test_cli.py", "description": "Unit tests for CLI commands and error states"}
+        ],
+        "branch_name": "fix/cli-flask-app-diagnostic",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b fix/cli-flask-app-diagnostic",
+        "plan_checklist": [
+          "Inspect locate_app() inside src/flask/cli.py.",
+          "Differentiate between module not found vs attribute not found in target module.",
+          "Provide actionable hint: 'Did you mean ...?'.",
+          "Ensure CLI exit code remains consistent (code 2 for usage errors)."
+        ],
+        "test_commands": "pytest tests/test_cli.py -k test_locate_app",
+        "pr_template": "### What does this PR do?\nImproves diagnostic output when FLASK_APP cannot locate the specified application attribute.\n\n### Related Issue\nCloses #5918\n\n### Testing\n- [x] Added unit tests for missing module and missing attribute in `tests/test_cli.py`.\n- [x] Ran full test suite with zero failures."
+      }
+    },
+    {
+      "id": 5820,
+      "number": 5820,
+      "demo_id": "DEMO-5820",
+      "title": "Typo in Quickstart tutorial code example for session handling",
+      "body": "In docs/quickstart.rst under the 'Sessions' heading, the snippet assigns session['username'] but references session.get('user') in the subsequent condition snippet, causing beginner confusion.",
+      "description": "In docs/quickstart.rst under the 'Sessions' heading, the snippet assigns session['username'] but references session.get('user') in the subsequent condition snippet, causing beginner confusion.",
+      "labels": ["documentation", "good first issue", "easy"],
+      "comments": 1,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/5820",
+      "reference_url": "https://github.com/pallets/flask/issues/5820",
+      "difficulty": "Beginner",
+      "fit_score": 96,
+      "score_explanation": [
+        "Base score for Beginner difficulty: +90",
+        "Single focused report (1 comment): +1",
+        "Unassigned & open for contributors: +5",
+        "Clean, self-contained documentation correction: +5"
+      ],
+      "suggested_skills": ["Python", "Documentation", "Quickstart"],
+      "suggested_implementation_steps": [
+        "Open docs/quickstart.rst and navigate to the Sessions section.",
+        "Change session.get('user') to session.get('username') so keys match.",
+        "Verify surrounding code consistency.",
+        "Run Sphinx build to ensure no markup syntax errors."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Inconsistent dictionary key naming in the official beginner quickstart guide causes unexpected behavior when copying example code.",
+        "suggested_files": [
+          {"path": "docs/quickstart.rst", "description": "Beginner tutorial and quickstart guide"}
+        ],
+        "branch_name": "fix/quickstart-session-key-typo",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b fix/quickstart-session-key-typo",
+        "plan_checklist": [
+          "Locate line in docs/quickstart.rst.",
+          "Synchronize variable names across snippet.",
+          "Check documentation preview."
+        ],
+        "test_commands": "tox -e docs",
+        "pr_template": "### What does this PR do?\nFixes mismatched session dictionary keys in the Quickstart documentation.\n\n### Related Issue\nCloses #5820\n\n### Testing\n- [x] Verified code snippet matches intended quickstart execution."
+      }
+    },
+    {
+      "id": 6012,
+      "number": 6012,
+      "demo_id": "DEMO-6012",
+      "title": "Clarify test client json parameter type annotations in docstrings",
+      "body": "The FlaskClient.post() method accepts json argument which is serialized using the app json provider. The docstring still mentions simplejson instead of current json provider architecture.",
+      "description": "The FlaskClient.post() method accepts json argument which is serialized using the app json provider. The docstring still mentions simplejson instead of current json provider architecture.",
+      "labels": ["documentation", "testing", "good first issue"],
+      "comments": 3,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/6012",
+      "reference_url": "https://github.com/pallets/flask/issues/6012",
+      "difficulty": "Beginner",
+      "fit_score": 90,
+      "score_explanation": [
+        "Base score for Beginner difficulty: +90",
+        "Focused discussion (3 comments): +3",
+        "Unassigned & open for contributors: +5",
+        "Docstring correction: +5"
+      ],
+      "suggested_skills": ["Python", "Docstrings", "Type Hints"],
+      "suggested_implementation_steps": [
+        "Inspect src/flask/testing.py FlaskClient class docstrings.",
+        "Update references from legacy serializer to app.json provider.",
+        "Verify Sphinx autodoc builds without errors."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Docstring refers to outdated serialization architecture which was replaced in Flask 2.2+.",
+        "suggested_files": [
+          {"path": "src/flask/testing.py", "description": "Test client implementation"},
+          {"path": "docs/testing.rst", "description": "Automated testing guide"}
+        ],
+        "branch_name": "docs/testing-json-annotations",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b docs/testing-json-annotations",
+        "plan_checklist": [
+          "Update docstrings in src/flask/testing.py.",
+          "Ensure type hints match typing.Any.",
+          "Run pytest tests/test_testing.py."
+        ],
+        "test_commands": "pytest tests/test_testing.py",
+        "pr_template": "### What does this PR do?\nUpdates docstring annotations for test client json parameters to reflect current JSON provider architecture.\n\n### Related Issue\nCloses #6012"
+      }
+    },
+    {
+      "id": 5665,
+      "number": 5665,
+      "demo_id": "DEMO-5665",
+      "title": "Support automatic OPTIONS response customization in Blueprint decorators",
+      "body": "Add an options_handler parameter to Blueprint route decorators to allow custom CORS preflight headers without wrapping every endpoint individually.",
+      "description": "Add an options_handler parameter to Blueprint route decorators to allow custom CORS preflight headers without wrapping every endpoint individually.",
+      "labels": ["routing", "enhancement", "medium"],
+      "comments": 7,
+      "assignee": "contributor-dev",
+      "html_url": "https://github.com/pallets/flask/issues/5665",
+      "reference_url": "https://github.com/pallets/flask/issues/5665",
+      "difficulty": "Intermediate",
+      "fit_score": 78,
+      "score_explanation": [
+        "Base score for Intermediate difficulty: +70",
+        "Active design discussion (7 comments): +7",
+        "Claimed by contributor: -20",
+        "Clear architectural request: +5"
+      ],
+      "suggested_skills": ["Python", "HTTP Routing", "Blueprints", "WSGI"],
+      "suggested_implementation_steps": [
+        "Inspect Blueprint route registration in src/flask/blueprints.py.",
+        "Check how rule options are forwarded to Werkzeug Rule.",
+        "Implement options_handler callback in app dispatch.",
+        "Write integration tests in tests/test_blueprints.py."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Blueprints currently delegate OPTIONS handling to Werkzeug default, making blueprint-scoped preflight responses difficult to customize cleanly.",
+        "suggested_files": [
+          {"path": "src/flask/blueprints.py", "description": "Blueprint routing and lifecycle methods"},
+          {"path": "src/flask/scaffold.py", "description": "Common shared routing scaffold"},
+          {"path": "tests/test_blueprints.py", "description": "Blueprint unit test suite"}
+        ],
+        "branch_name": "feat/blueprint-options-customization",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b feat/blueprint-options-customization",
+        "plan_checklist": [
+          "Study Blueprint.add_url_rule() and Scaffold route decorator.",
+          "Ensure backwards compatibility when options_handler is None.",
+          "Verify OPTIONS status code 200/204 according to HTTP specification.",
+          "Write unit test with preflight request headers."
+        ],
+        "test_commands": "pytest tests/test_blueprints.py -k test_options",
+        "pr_template": "### What does this PR do?\nAdds optional options_handler configuration to Blueprint routing.\n\n### Related Issue\nCloses #5665\n\n### Testing\n- [x] Added tests in `tests/test_blueprints.py` covering standard and customized OPTIONS preflights."
+      }
+    },
+    {
+      "id": 5744,
+      "number": 5744,
+      "demo_id": "DEMO-5744",
+      "title": "Refactor json encoder registration to support msgspec custom serialization",
+      "body": "Enable pluggable third-party JSON encoders (such as msgspec or orjson) by exposing a clean JSONProvider subclass interface without monkey-patching.",
+      "description": "Enable pluggable third-party JSON encoders (such as msgspec or orjson) by exposing a clean JSONProvider subclass interface without monkey-patching.",
+      "labels": ["enhancement", "json", "performance"],
+      "comments": 5,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/5744",
+      "reference_url": "https://github.com/pallets/flask/issues/5744",
+      "difficulty": "Intermediate",
+      "fit_score": 75,
+      "score_explanation": [
+        "Base score for Intermediate difficulty: +70",
+        "Constructive discussion (5 comments): +5",
+        "Unassigned & open for contributors: +5",
+        "High quality feature proposal: +5"
+      ],
+      "suggested_skills": ["Python", "JSON", "Protocols", "OOP"],
+      "suggested_implementation_steps": [
+        "Review DefaultJSONProvider in src/flask/json/provider.py.",
+        "Refactor dumps/loads hooks to accept arbitrary byte buffers.",
+        "Verify jsonify() compatibility with custom provider instances.",
+        "Add unit test with a mock custom serializer."
+      ],
+      "roadmap": {
+        "problem_breakdown": "High-performance applications need to replace standard library json serialization with fast binary serialization providers like msgspec.",
+        "suggested_files": [
+          {"path": "src/flask/json/provider.py", "description": "JSONProvider abstract interface and DefaultJSONProvider"},
+          {"path": "src/flask/json/__init__.py", "description": "Public json serialization helpers"},
+          {"path": "tests/test_json.py", "description": "JSON serialization test cases"}
+        ],
+        "branch_name": "feat/pluggable-json-providers",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b feat/pluggable-json-providers",
+        "plan_checklist": [
+          "Check JSONProvider contract in src/flask/json/provider.py.",
+          "Ensure response headers Content-Type remain application/json.",
+          "Benchmark overhead of dynamic provider dispatch."
+        ],
+        "test_commands": "pytest tests/test_json.py",
+        "pr_template": "### What does this PR do?\nRefactors JSONProvider interface to better support alternative high-speed encoders.\n\n### Related Issue\nCloses #5744\n\n### Testing\n- [x] Ran json test suite with standard and custom provider implementations."
+      }
+    },
+    {
+      "id": 5890,
+      "number": 5890,
+      "demo_id": "DEMO-5890",
+      "title": "CLI: Add --dry-run flag to flask routes command",
+      "body": "When inspecting complicated blueprint route hierarchies, developers want to filter or output routes without executing application initialization side-effects.",
+      "description": "When inspecting complicated blueprint route hierarchies, developers want to filter or output routes without executing application initialization side-effects.",
+      "labels": ["cli", "enhancement", "routing"],
+      "comments": 3,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/5890",
+      "reference_url": "https://github.com/pallets/flask/issues/5890",
+      "difficulty": "Intermediate",
+      "fit_score": 82,
+      "score_explanation": [
+        "Base score for Intermediate difficulty: +70",
+        "Active discussion (3 comments): +3",
+        "Unassigned & open for contributors: +5",
+        "Well defined scope: +5"
+      ],
+      "suggested_skills": ["Python", "Click", "CLI", "Inspection"],
+      "suggested_implementation_steps": [
+        "Examine routes_command in src/flask/cli.py.",
+        "Add @click.option('--sort') and formatting parameters.",
+        "Handle edge cases where url_map has empty rules.",
+        "Write automated CLI tests in tests/test_cli.py."
+      ],
+      "roadmap": {
+        "problem_breakdown": "The routes command displays rules in registration order, which becomes unwieldy in large apps with hundreds of routes.",
+        "suggested_files": [
+          {"path": "src/flask/cli.py", "description": "Flask CLI commands definition"},
+          {"path": "tests/test_cli.py", "description": "CLI tests with Click runner"}
+        ],
+        "branch_name": "feat/cli-routes-formatting",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b feat/cli-routes-formatting",
+        "plan_checklist": [
+          "Add click options to routes_command.",
+          "Format tabular display cleanly in terminal.",
+          "Add CliRunner test assertions."
+        ],
+        "test_commands": "pytest tests/test_cli.py -k routes",
+        "pr_template": "### What does this PR do?\nAdds sorting and clean table formatting to flask routes CLI command.\n\n### Related Issue\nCloses #5890\n\n### Testing\n- [x] Tested with sample app in tests/test_cli.py."
+      }
+    },
+    {
+      "id": 5933,
+      "number": 5933,
+      "demo_id": "DEMO-5933",
+      "title": "Add hook for modifying response headers before signal emission",
+      "body": "Signals like request_finished receive the response object, but modifying headers inside signal handlers is discouraged because headers might already be partially locked by the WSGI wrapper.",
+      "description": "Signals like request_finished receive the response object, but modifying headers inside signal handlers is discouraged because headers might already be partially locked by the WSGI wrapper.",
+      "labels": ["signals", "enhancement", "headers"],
+      "comments": 4,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/5933",
+      "reference_url": "https://github.com/pallets/flask/issues/5933",
+      "difficulty": "Intermediate",
+      "fit_score": 72,
+      "score_explanation": [
+        "Base score for Intermediate difficulty: +70",
+        "Comments count within target range (4 comments): +4",
+        "Unassigned & open for contributors: +5",
+        "Design requires careful signal ordering: -5"
+      ],
+      "suggested_skills": ["Python", "Blinker", "Signals", "WSGI"],
+      "suggested_implementation_steps": [
+        "Inspect process_response() in src/flask/app.py.",
+        "Verify order of after_request callbacks versus blinker signals.",
+        "Document safe patterns for header modification.",
+        "Add unit test with blinker signal receivers."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Developers need a reliable stage to attach auditing and telemetry headers before WSGI start_response is invoked.",
+        "suggested_files": [
+          {"path": "src/flask/app.py", "description": "Flask application WSGI dispatching logic"},
+          {"path": "src/flask/signals.py", "description": "Blinker signal definitions"}
+        ],
+        "branch_name": "feat/response-header-hooks",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b feat/response-header-hooks",
+        "plan_checklist": [
+          "Analyze process_response() lifecycle.",
+          "Ensure zero performance regression when signals are disabled.",
+          "Write test with mock telemetry signal subscriber."
+        ],
+        "test_commands": "pytest tests/test_signals.py",
+        "pr_template": "### What does this PR do?\nEnsures clear execution order for telemetry headers prior to WSGI serialization.\n\n### Related Issue\nCloses #5933"
+      }
+    },
+    {
+      "id": 5611,
+      "number": 5611,
+      "demo_id": "DEMO-5611",
+      "title": "Improve typing support for g and current_app proxy attributes",
+      "body": "When using MyPy or Pyright in strict mode, accessing arbitrary dynamic attributes on the flask.g proxy raises type errors unless explicitly cast.",
+      "description": "When using MyPy or Pyright in strict mode, accessing arbitrary dynamic attributes on the flask.g proxy raises type errors unless explicitly cast.",
+      "labels": ["typing", "refactor", "medium"],
+      "comments": 6,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/5611",
+      "reference_url": "https://github.com/pallets/flask/issues/5611",
+      "difficulty": "Intermediate",
+      "fit_score": 76,
+      "score_explanation": [
+        "Base score for Intermediate difficulty: +70",
+        "Good developer discussion (6 comments): +6",
+        "Unassigned & open for contributors: +5",
+        "Typing enhancement: +5"
+      ],
+      "suggested_skills": ["Python", "Type Hints", "PEP 561", "MyPy"],
+      "suggested_implementation_steps": [
+        "Inspect src/flask/ctx.py and src/flask/globals.py.",
+        "Add __getattr__ override with typing.Any fallback for g proxy.",
+        "Add py.typed verification test case.",
+        "Run typechecker suite."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Strict static type checkers flag dynamic attribute assignment on flask.g without proper PEP 561 annotations.",
+        "suggested_files": [
+          {"path": "src/flask/globals.py", "description": "Thread-local proxies for request, session, g"},
+          {"path": "src/flask/ctx.py", "description": "AppContext and RequestContext implementations"}
+        ],
+        "branch_name": "fix/typing-g-proxy",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b fix/typing-g-proxy",
+        "plan_checklist": [
+          "Update type definitions in globals.py.",
+          "Verify compatibility with Python 3.10 through 3.14.",
+          "Run mypy on tests/typing."
+        ],
+        "test_commands": "mypy src/flask",
+        "pr_template": "### What does this PR do?\nImproves type annotations on flask.g to prevent false positive typing errors in strict mode.\n\n### Related Issue\nCloses #5611"
+      }
+    },
+    {
+      "id": 5660,
+      "number": 5660,
+      "demo_id": "DEMO-5660",
+      "title": "Investigate async worker context leak when streaming generator responses abort",
+      "body": "When a streaming response generator aborts midway due to client disconnection, the request context teardown callback may fire after the socket is already torn down, causing AsyncContextError.",
+      "description": "When a streaming response generator aborts midway due to client disconnection, the request context teardown callback may fire after the socket is already torn down, causing AsyncContextError.",
+      "labels": ["async", "core", "bug", "advanced"],
+      "comments": 16,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/5660",
+      "reference_url": "https://github.com/pallets/flask/issues/5660",
+      "difficulty": "Advanced",
+      "fit_score": 48,
+      "score_explanation": [
+        "Base score for Advanced difficulty: +45",
+        "High contention discussion (16 comments): -10",
+        "Unassigned & open for contributors: +5",
+        "Complex asynchronous lifecycle problem: +5"
+      ],
+      "suggested_skills": ["Python", "AsyncIO", "ContextVars", "WSGI/ASGI Bridges"],
+      "suggested_implementation_steps": [
+        "Reproduce issue with a disconnected client test harness.",
+        "Trace async context teardown callbacks in src/flask/app.py.",
+        "Ensure generator.close() triggers clean context unwinding.",
+        "Benchmark streaming memory under high concurrency."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Early client disconnection during HTTP streaming leaves ContextVar frames dangling in async execution loops.",
+        "suggested_files": [
+          {"path": "src/flask/app.py", "description": "Core WSGI application entrypoint and context teardown"},
+          {"path": "src/flask/helpers.py", "description": "stream_with_context implementation"},
+          {"path": "tests/test_async.py", "description": "Asynchronous response test cases"}
+        ],
+        "branch_name": "fix/async-streaming-context-leak",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b fix/async-streaming-context-leak",
+        "plan_checklist": [
+          "Create reproducible test case simulating aborted generator stream.",
+          "Add try/finally guard around async iterator consumption.",
+          "Verify memory footprint with tracemalloc during client disconnects."
+        ],
+        "test_commands": "pytest tests/test_async.py",
+        "pr_template": "### What does this PR do?\nGuarantees context teardown execution when async streaming generator is aborted prematurely.\n\n### Related Issue\nCloses #5660\n\n### Testing\n- [x] Added unit test with simulated client abort in `tests/test_async.py`."
+      }
+    },
+    {
+      "id": 5789,
+      "number": 5789,
+      "demo_id": "DEMO-5789",
+      "title": "Optimize request dispatching tree traversal during high concurrent routing",
+      "body": "In applications with more than 500 endpoint rules, regex compilation overhead in MapAdapter adds 1.2ms latency per request on initial path matching.",
+      "description": "In applications with more than 500 endpoint rules, regex compilation overhead in MapAdapter adds 1.2ms latency per request on initial path matching.",
+      "labels": ["performance", "routing", "advanced"],
+      "comments": 18,
+      "assignee": "core-team",
+      "html_url": "https://github.com/pallets/flask/issues/5789",
+      "reference_url": "https://github.com/pallets/flask/issues/5789",
+      "difficulty": "Advanced",
+      "fit_score": 42,
+      "score_explanation": [
+        "Base score for Advanced difficulty: +45",
+        "High discussion thread (18 comments): -10",
+        "Claimed by core-team maintainer: -20",
+        "Requires deep compiler / routing profiling: +5"
+      ],
+      "suggested_skills": ["Python", "Algorithms", "Radix Trees", "Profiling"],
+      "suggested_implementation_steps": [
+        "Profile Werkzeug routing match benchmarks with 1,000 routes.",
+        "Evaluate radix tree prefix cache for static path prefixes.",
+        "Run memory churn benchmarks using pytest-benchmark."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Linear regex evaluation for massive route maps causes measurable latency in microservice APIs with deep URL structures.",
+        "suggested_files": [
+          {"path": "src/flask/app.py", "description": "Dispatching logic"},
+          {"path": "src/flask/blueprints.py", "description": "Blueprint prefix mapping"}
+        ],
+        "branch_name": "perf/route-dispatch-prefix-cache",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b perf/route-dispatch-prefix-cache",
+        "plan_checklist": [
+          "Profile existing route dispatching with cProfile.",
+          "Implement memoized static prefix check before regex execution.",
+          "Verify zero regression on url_for reversals."
+        ],
+        "test_commands": "pytest tests/test_basic.py -k test_routing",
+        "pr_template": "### What does this PR do?\nImplements prefix memoization for URL rule dispatching.\n\n### Related Issue\nCloses #5789"
+      }
+    },
+    {
+      "id": 5850,
+      "number": 5850,
+      "demo_id": "DEMO-5850",
+      "title": "Implement zero-copy file transmission via send_file on Windows asyncio loops",
+      "body": "On Windows ProactorEventLoop, send_file falls back to chunked synchronous read buffers instead of utilizing TransmitFile kernel calls.",
+      "description": "On Windows ProactorEventLoop, send_file falls back to chunked synchronous read buffers instead of utilizing TransmitFile kernel calls.",
+      "labels": ["windows", "async", "performance", "advanced"],
+      "comments": 22,
+      "assignee": null,
+      "html_url": "https://github.com/pallets/flask/issues/5850",
+      "reference_url": "https://github.com/pallets/flask/issues/5850",
+      "difficulty": "Advanced",
+      "fit_score": 38,
+      "score_explanation": [
+        "Base score for Advanced difficulty: +45",
+        "Heavy contention thread (22 comments): -10",
+        "Unassigned & open: +5",
+        "Platform-specific low-level kernel I/O complexity: -2"
+      ],
+      "suggested_skills": ["Python", "Windows API", "C/Win32", "AsyncIO I/O"],
+      "suggested_implementation_steps": [
+        "Audit helpers.send_file implementation on Windows.",
+        "Benchmark memory buffers with large static assets (100MB+).",
+        "Integrate Proactor loop sendfile primitives safely."
+      ],
+      "roadmap": {
+        "problem_breakdown": "Serving large static assets through async Flask on Windows incurs high CPU overhead without native TransmitFile support.",
+        "suggested_files": [
+          {"path": "src/flask/helpers.py", "description": "send_file and send_from_directory helpers"},
+          {"path": "tests/test_helpers.py", "description": "Static file delivery test cases"}
+        ],
+        "branch_name": "perf/windows-async-sendfile",
+        "git_commands": "git clone https://github.com/pallets/flask.git\ncd flask\ngit checkout -b perf/windows-async-sendfile",
+        "plan_checklist": [
+          "Check asyncio.loop.sendfile support on Windows Proactor.",
+          "Implement fallback for unsupported socket transports.",
+          "Test with temporary large files."
+        ],
+        "test_commands": "pytest tests/test_helpers.py -k test_send_file",
+        "pr_template": "### What does this PR do?\nAdds optimized file transmission for Windows async event loops.\n\n### Related Issue\nCloses #5850"
+      }
+    }
+  ],
+  "pull_request": {
+    "id": 6168,
+    "number": 6168,
+    "demo_pr_id": "DEMO-PR-6168",
+    "title": "drop support for Python 3.10",
+    "html_url": "https://github.com/pallets/flask/pull/6168",
+    "reference_url": "https://github.com/pallets/flask/pull/6168",
+    "state": "open",
+    "body": "Python 3.10 reaches end of life upstream in October 2026. This PR drops Python 3.10 from test matrix and updates pyproject.toml minimum python version.\n\nCloses #6140\n\n### Changes\n- Removed 3.10 from GitHub Actions workflow matrix\n- Updated python_requires in pyproject.toml\n- Updated docs/changes.rst with migration note",
+    "description": "Python 3.10 reaches end of life upstream in October 2026. This PR drops Python 3.10 from test matrix and updates pyproject.toml minimum python version.\n\nCloses #6140\n\n### Changes\n- Removed 3.10 from GitHub Actions workflow matrix\n- Updated python_requires in pyproject.toml\n- Updated docs/changes.rst with migration note",
+    "author": "davidism",
+    "user": {
+      "login": "davidism",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1674850?v=4"
+    },
+    "head": {
+      "ref": "drop-py310"
+    },
+    "base": {
+      "ref": "main"
+    },
+    "additions": 14,
+    "deletions": 28,
+    "changed_files": 3,
+    "files": [
+      {
+        "filename": ".github/workflows/tests.yaml",
+        "additions": 2,
+        "deletions": 12,
+        "status": "modified"
+      },
+      {
+        "filename": "pyproject.toml",
+        "additions": 1,
+        "deletions": 1,
+        "status": "modified"
+      },
+      {
+        "filename": "docs/changes.rst",
+        "additions": 11,
+        "deletions": 15,
+        "status": "modified"
+      }
+    ],
+    "linked_issue": "#6140",
+    "review_status": "Approved by senior maintainer",
+    "reviews": [
+      {
+        "state": "APPROVED",
+        "user": {
+          "login": "untitaker"
+        }
+      }
+    ],
+    "simulated_notice": "SIMULATED DEMO PR - NOT A LIVE GITHUB PULL REQUEST",
+    "readiness_score": 95,
+    "readiness_checklist": {
+      "description": {
+        "status": "pass",
+        "details": "Comprehensive description provided with changelog and testing notes."
+      },
+      "linked_issue": {
+        "status": "pass",
+        "details": "Linked issue reference detected (Closes #6140)."
+      },
+      "diff_size": {
+        "status": "pass",
+        "details": "Manageable diff size (42 total lines modified)."
+      },
+      "files_count": {
+        "status": "pass",
+        "details": "Focused scope across 3 configuration and documentation files."
+      },
+      "review_status": {
+        "status": "pass",
+        "details": "Approved by repository maintainer (@untitaker)."
+      }
+    },
+    "suggested_improvements": [
+      "Ensure documentation release notes (docs/changes.rst) highlight breaking change for users on 3.10.",
+      "Verify CI wheels matrix doesn't attempt 3.10 builds."
+    ]
+  },
+  "analytics": {
+    "repositories_analyzed": 1,
+    "total_issues_discovered": 12,
+    "beginner_issues": 4,
+    "intermediate_issues": 5,
+    "advanced_issues": 3,
+    "high_fit_opportunities": 9,
+    "difficulty_distribution": {
+      "Beginner": 4,
+      "Intermediate": 5,
+      "Advanced": 3
+    },
+    "labels_distribution": {
+      "documentation": 3,
+      "good first issue": 4,
+      "enhancement": 4,
+      "cli": 2,
+      "routing": 2,
+      "async": 2,
+      "performance": 2,
+      "easy": 2,
+      "refactor": 1
+    },
+    "fit_score_distribution": {
+      "90-100": 4,
+      "75-89": 4,
+      "50-74": 1,
+      "<50": 3
+    },
+    "contribution_opportunities": [
+      {
+        "id": 5820,
+        "title": "Typo in Quickstart tutorial code example for session handling",
+        "difficulty": "Beginner",
+        "fit_score": 96
+      },
+      {
+        "id": 6146,
+        "title": "Add Cloudflare to Flask Hosting Platforms documentation",
+        "difficulty": "Beginner",
+        "fit_score": 95
+      },
+      {
+        "id": 5918,
+        "title": "CLI: Improve error diagnostic when FLASK_APP points to nonexistent module",
+        "difficulty": "Beginner",
+        "fit_score": 92
+      },
+      {
+        "id": 6012,
+        "title": "Clarify test client json parameter type annotations in docstrings",
+        "difficulty": "Beginner",
+        "fit_score": 90
+      },
+      {
+        "id": 5890,
+        "title": "CLI: Add --dry-run flag to flask routes command",
+        "difficulty": "Intermediate",
+        "fit_score": 82
+      }
+    ]
+  }
+}
+
